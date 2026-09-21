@@ -1,0 +1,12 @@
+C:\Users\AbdoA\source\repos\CraftIQ\CraftIQ.Inventory.Core\bin\Debug\net10.0\CraftIQ.Inventory.Core.deps.json
+C:\Users\AbdoA\source\repos\CraftIQ\CraftIQ.Inventory.Core\bin\Debug\net10.0\CraftIQ.Inventory.Core.dll
+C:\Users\AbdoA\source\repos\CraftIQ\CraftIQ.Inventory.Core\bin\Debug\net10.0\CraftIQ.Inventory.Core.pdb
+C:\Users\AbdoA\source\repos\CraftIQ\CraftIQ.Inventory.Core\obj\Debug\net10.0\CraftIQ.Inventory.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\AbdoA\source\repos\CraftIQ\CraftIQ.Inventory.Core\obj\Debug\net10.0\CraftIQ.Inventory.Core.AssemblyInfoInputs.cache
+C:\Users\AbdoA\source\repos\CraftIQ\CraftIQ.Inventory.Core\obj\Debug\net10.0\CraftIQ.Inventory.Core.AssemblyInfo.cs
+C:\Users\AbdoA\source\repos\CraftIQ\CraftIQ.Inventory.Core\obj\Debug\net10.0\CraftIQ.Inventory.Core.csproj.CoreCompileInputs.cache
+C:\Users\AbdoA\source\repos\CraftIQ\CraftIQ.Inventory.Core\obj\Debug\net10.0\CraftIQ.Inventory.Core.dll
+C:\Users\AbdoA\source\repos\CraftIQ\CraftIQ.Inventory.Core\obj\Debug\net10.0\refint\CraftIQ.Inventory.Core.dll
+C:\Users\AbdoA\source\repos\CraftIQ\CraftIQ.Inventory.Core\obj\Debug\net10.0\CraftIQ.Inventory.Core.pdb
+C:\Users\AbdoA\source\repos\CraftIQ\CraftIQ.Inventory.Core\obj\Debug\net10.0\ref\CraftIQ.Inventory.Core.dll
+C:\Users\AbdoA\source\repos\CraftIQ\CraftIQ.Inventory.Core\obj\Debug\net10.0\CraftIQ..CF83E657.Up2Date

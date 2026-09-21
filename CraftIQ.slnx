@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="CraftIQ.Inventory.Core/CraftIQ.Inventory.Core.csproj" />
+  <Project Path="CraftIQ.Inventory.Infrastructre/CraftIQ.Inventory.Infrastructre.csproj" />
+  <Project Path="CraftIQ.Inventory.Services/CraftIQ.Inventory.Services.csproj" />
+  <Project Path="CraftIQ.Inventory.Shared/CraftIQ.Inventory.Shared.csproj" Id="3f22c935-5683-45a1-bf55-b822c004ec98" />
+  <Project Path="CraftIQ/CraftIQ.csproj" />
+</Solution>

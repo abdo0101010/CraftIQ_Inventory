@@ -1,0 +1,17 @@
+C:\Users\AbdoA\source\repos\CraftIQ\CraftIQ.Inventory.Infrastructre\bin\Debug\net10.0\CraftIQ.Inventory.Infrastructre.deps.json
+C:\Users\AbdoA\source\repos\CraftIQ\CraftIQ.Inventory.Infrastructre\bin\Debug\net10.0\CraftIQ.Inventory.Infrastructre.runtimeconfig.json
+C:\Users\AbdoA\source\repos\CraftIQ\CraftIQ.Inventory.Infrastructre\bin\Debug\net10.0\CraftIQ.Inventory.Infrastructre.dll
+C:\Users\AbdoA\source\repos\CraftIQ\CraftIQ.Inventory.Infrastructre\bin\Debug\net10.0\CraftIQ.Inventory.Infrastructre.pdb
+C:\Users\AbdoA\source\repos\CraftIQ\CraftIQ.Inventory.Infrastructre\bin\Debug\net10.0\CraftIQ.Inventory.Core.dll
+C:\Users\AbdoA\source\repos\CraftIQ\CraftIQ.Inventory.Infrastructre\bin\Debug\net10.0\CraftIQ.Inventory.Core.pdb
+C:\Users\AbdoA\source\repos\CraftIQ\CraftIQ.Inventory.Infrastructre\obj\Debug\net10.0\CraftIQ.Inventory.Infrastructre.csproj.AssemblyReference.cache
+C:\Users\AbdoA\source\repos\CraftIQ\CraftIQ.Inventory.Infrastructre\obj\Debug\net10.0\CraftIQ.Inventory.Infrastructre.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\AbdoA\source\repos\CraftIQ\CraftIQ.Inventory.Infrastructre\obj\Debug\net10.0\CraftIQ.Inventory.Infrastructre.AssemblyInfoInputs.cache
+C:\Users\AbdoA\source\repos\CraftIQ\CraftIQ.Inventory.Infrastructre\obj\Debug\net10.0\CraftIQ.Inventory.Infrastructre.AssemblyInfo.cs
+C:\Users\AbdoA\source\repos\CraftIQ\CraftIQ.Inventory.Infrastructre\obj\Debug\net10.0\CraftIQ.Inventory.Infrastructre.csproj.CoreCompileInputs.cache
+C:\Users\AbdoA\source\repos\CraftIQ\CraftIQ.Inventory.Infrastructre\obj\Debug\net10.0\CraftIQ..E3B2C383.Up2Date
+C:\Users\AbdoA\source\repos\CraftIQ\CraftIQ.Inventory.Infrastructre\obj\Debug\net10.0\CraftIQ.Inventory.Infrastructre.dll
+C:\Users\AbdoA\source\repos\CraftIQ\CraftIQ.Inventory.Infrastructre\obj\Debug\net10.0\refint\CraftIQ.Inventory.Infrastructre.dll
+C:\Users\AbdoA\source\repos\CraftIQ\CraftIQ.Inventory.Infrastructre\obj\Debug\net10.0\CraftIQ.Inventory.Infrastructre.pdb
+C:\Users\AbdoA\source\repos\CraftIQ\CraftIQ.Inventory.Infrastructre\obj\Debug\net10.0\CraftIQ.Inventory.Infrastructre.genruntimeconfig.cache
+C:\Users\AbdoA\source\repos\CraftIQ\CraftIQ.Inventory.Infrastructre\obj\Debug\net10.0\ref\CraftIQ.Inventory.Infrastructre.dll

@@ -1,0 +1,150 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "CraftIQ",
+    "version": "1.0"
+  },
+  "paths": {
+    "/Createcategories": {
+      "post": {
+        "tags": [
+          "CreateCategories"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCategoriesRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCategoriesRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCategoriesRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCategoriesRepsonse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCategoriesRepsonse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCategoriesRepsonse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/DeleteCategory/{CategoryId}": {
+      "delete": {
+        "tags": [
+          "DeleteCategory"
+        ],
+        "parameters": [
+          {
+            "name": "CategoryId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteCategoryResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteCategoryResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteCategoryResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateCategoriesRepsonse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateCategoriesRequest": {
+        "required": [
+          "description",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeleteCategoryResponse": {
+        "type": "object",
+        "properties": {
+          "isDeleted": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "CreateCategories"
+    },
+    {
+      "name": "DeleteCategory"
+    }
+  ]
+}
