@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CraftIQ.REPR.Endpoints.Categories
+namespace CraftIQ.REPR.Endpoints.Categories.Create
 {
     public class CreateCategoriesRequest
     {

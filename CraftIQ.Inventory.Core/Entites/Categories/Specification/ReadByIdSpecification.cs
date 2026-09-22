@@ -1,0 +1,18 @@
+﻿using Ardalis.Specification;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace CraftIQ.Inventory.Core.Entites.Categories.Specification
+{
+    public class ReadByIdSpecification:SingleResultSpecification<Category>
+    {
+        public ReadByIdSpecification(Guid CategoryID)
+        {
+            Query.Where(c => c.CategoryId == CategoryID);
+
+        }
+
+
+    }
+}

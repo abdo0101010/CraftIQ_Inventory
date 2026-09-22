@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CraftIQ.Inventory.Infrastructre\CraftIQ.Inventory.Infrastructre.csproj" />
+    <ProjectReference Include="..\CraftIQ.Inventory.Services\CraftIQ.Inventory.Services.csproj" />
   </ItemGroup>
 	
 </Project>

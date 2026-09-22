@@ -1,4 +1,4 @@
-﻿using CraftIQ.Inventory.Core.Entites;
+﻿using CraftIQ.Inventory.Core.Entites.Categories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

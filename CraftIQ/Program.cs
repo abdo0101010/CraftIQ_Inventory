@@ -1,4 +1,5 @@
 using CraftIQ.Inventory.Infrastructre;
+using CraftIQ.Inventory.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -11,6 +12,7 @@ builder.Services.AddOpenApi();
 var InventoryConnectionString = builder.Configuration.GetSection("ConnectionStrings:InventoryDatabase");
 builder.Services.AddInventoryDbContext(InventoryConnectionString.Value!);
 builder.Services.AddInventoryRepository();
+builder.Services.RegisterServices();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

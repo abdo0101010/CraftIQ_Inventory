@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using CraftIQ.Inventory.Core.Entites;
 using System.Reflection;
+using CraftIQ.Inventory.Core.Entites.Categories;
 
 namespace CraftIQ.Inventory.Infrastructre.Data
 {

@@ -1,4 +1,4 @@
-﻿namespace CraftIQ.REPR.Endpoints.Categories
+﻿namespace CraftIQ.REPR.Endpoints.Categories.Delete
 {
     public class DeleteCategoryRequest
     {

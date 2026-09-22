@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CraftIQ.Inventory.Core.Entites
+namespace CraftIQ.Inventory.Core.Entites.Categories
 {
     public class Category : BaseEntity
     {
