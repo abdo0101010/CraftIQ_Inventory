@@ -2,6 +2,7 @@
 using CraftIQ.Inventory.Core.Entites;
 using System.Reflection;
 using CraftIQ.Inventory.Core.Entites.Categories;
+using CraftIQ.Inventory.Core.Entites.Products;
 
 namespace CraftIQ.Inventory.Infrastructre.Data
 {

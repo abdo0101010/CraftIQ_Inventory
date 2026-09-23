@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CraftIQ.Inventory.Core.Entites.Products;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
