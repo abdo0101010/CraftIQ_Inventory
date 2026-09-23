@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using CraftIQ.Inventory.Core.Entites;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using CraftIQ.Inventory.Core.Entites.Products;
 namespace CraftIQ.Inventory.Infrastructre.Prestistans.Config
 {
     internal class ProductConfigration : IEntityTypeConfiguration<Product>

@@ -3,20 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CraftIQ.Inventory.Core.Entites
+namespace CraftIQ.Inventory.Core.Entites.Products
 {
-//    1- Productld
-//2- Name
-//3- Description
-//4- UnitPrice
-//5- Weight
-//6-Length
-//7- Width
-//8- Height
-//9- Categoryld <>
-//10 - TaxCost
-//11- ProfitPerUnit
-//12- ProductionCost
+
     public class Product:BaseEntity
     {
         public Guid ProductId { get; set; }
