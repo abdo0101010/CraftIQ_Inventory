@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CraftIQ.Inventory.Shared.Contracts.Products
 {
-    internal class ProductContract:ProductOperationContract
+    public class ProductContract:ProductOperationContract
     {
         public DateTimeOffset CreatedOn { get; set; }
         public Guid CreatedBY { get; set; }
