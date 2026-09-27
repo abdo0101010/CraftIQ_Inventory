@@ -1,5 +1,6 @@
 ﻿using CraftIQ.Inventory.Core.Entites.Categories;
 using CraftIQ.Inventory.Core.Entites.Products;
+using CraftIQ.Inventory.Core.interfaces;
 using CraftIQ.Inventory.Services.CategoriesImplemention;
 using huzcodes.Persistence.Interfaces.Repositories;
 using System;
@@ -20,6 +21,8 @@ namespace CraftIQ.Inventory.Services.Factories
             {
                 case nameof(Category):
                     return new CategoriesServices<TRequest, TResponse>(_category);
+
+                default: return null!;
             }
 
         }

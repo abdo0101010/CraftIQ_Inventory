@@ -21,7 +21,7 @@ namespace CraftIQ.Inventory.Services.CategoriesImplemention
             var OData = new Category(OContract!.Name, OContract.Description);
             var OResult = await _repository.AddAsync(OData);
             return new CategoriesOperationContract(OResult.Name, OResult.Description)as dynamic;
-            ;
+            
         }
 
         public async ValueTask Delete(Guid ContractId)
@@ -52,11 +52,23 @@ namespace CraftIQ.Inventory.Services.CategoriesImplemention
             else return new List<CategoriesContract>() as dynamic;
 
         }
-        }
+        
 
-        public ValueTask<TResponse> GetById(Guid ContractId)
+        public async ValueTask<TResponse> GetById(Guid ContractId)
         {
-            throw new NotImplementedException();
+            var oReadById = new ReadByIdSpecification(ContractId);
+            var oData = await _repository.FirstOrDefaultAsync(oReadById);
+            if (oData != null)
+            {
+                return new CategoriesContract(oData.CategoryId,
+                                              oData.Name,
+                                              oData.Description,
+                                              oData.CreatedBY, 
+                                              oData.ModifiedBy,
+                                              oData.CreatedOn, 
+                                              oData.ModifiedOn) as dynamic;
+            }
+            else  throw new ResultException("not found Category", (int)HttpStatusCode.NotFound);
         }
 
         public ValueTask<List<TResponse>> GetByParentId(Guid parentId)
@@ -69,9 +81,18 @@ namespace CraftIQ.Inventory.Services.CategoriesImplemention
             throw new NotImplementedException();
         }
 
-        public ValueTask<TResponse> Update(TRequest contract, Guid id)
+        public async ValueTask Update(TRequest contract, Guid id)
         {
-            throw new NotImplementedException();
+            var Ocontract = contract as CategoriesOperationContract;
+            var oReadByIdSpec = new ReadByIdSpecification(id);
+            var oData =await _repository.FirstOrDefaultAsync(oReadByIdSpec);
+            if(oData!=null)
+            {
+                oData.UpdateCategory(Ocontract!.Name, Ocontract.Description, Guid.NewGuid());
+                await _repository.UpdateAsync(oData);
+
+            }
+            else throw new ResultException("not found Category", (int)HttpStatusCode.NotFound); ;
         }
 
         public ValueTask UpdateParentId(Guid ContractId, Guid parentId)

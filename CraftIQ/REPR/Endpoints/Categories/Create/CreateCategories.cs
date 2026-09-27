@@ -1,30 +1,29 @@
 ﻿using CraftIQ.Inventory.Core.Entites.Categories;
-using CraftIQ.Inventory.Core.interfaces;
+using CraftIQ.Inventory.Services.Factories;
 using CraftIQ.Inventory.Shared.Contracts.Categories;
-using CraftIQ.REPR.Endpoints.Routes;
 using huzcodes.Endpoints.Abstractions;
 using huzcodes.Extensions.Exceptions;
-using huzcodes.Persistence.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CraftIQ.REPR.Endpoints.Categories.Create
 {
-    public class CreateCategories(ICateegoriesServices categoriesServices) : EndpointsAsync.WithRequest<CreateCategoriesRequest>.WithActionResult<CreateCategoriesRepsonse>
+    public class CreateCategories(InventoryFactory<CategoriesOperationContract, CategoriesOperationContract> factory)
+            : EndpointsAsync.WithRequest<CreateCategoriesRequest>.WithActionResult<CreateCategoriesRepsonse>
     {
-        private readonly ICateegoriesServices _categoriesServices = categoriesServices;
-        [HttpPost(Routes.Routes.CategoriesRoutes.Create)]
+        InventoryFactory<CategoriesOperationContract, CategoriesOperationContract>  _factory = factory;
+               [HttpPost(Routes.Routes.CategoriesRoutes.Create)]
         public override async Task<ActionResult<CreateCategoriesRepsonse>> HandleAsync(CreateCategoriesRequest request, CancellationToken cancellationToken = default)
         {
             if (request == null)
             {
                 throw new ResultException("Request cannot be null", StatusCodes.Status400BadRequest);
             }
-            var OData = new CategoriesOperationContract(request.Name, request.Description);
+            var contractInput = new CategoriesOperationContract(request.Name, request.Description);
+            var service = _factory.Build(nameof(Category));
 
-            var OResult = await _categoriesServices.CreateCategory(OData);
-
-
-            return Ok(new CreateCategoriesRepsonse(OResult.Name, OResult.Description));
+            var oData = new CategoriesOperationContract(request.Name, request.Description);
+            var oResult = await service.Create(oData);
+            return Ok(new CreateCategoriesRepsonse(oResult.Name, oResult.Description));
         }
     }
 }
