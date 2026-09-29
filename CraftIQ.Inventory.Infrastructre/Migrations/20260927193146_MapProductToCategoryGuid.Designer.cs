@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CraftIQ.Inventory.Infrastructre.Migrations
 {
     [DbContext(typeof(AppContextDb))]
-    [Migration("20260921140458_intial_db_Creation")]
-    partial class intial_db_Creation
+    [Migration("20260927193146_MapProductToCategoryGuid")]
+    partial class MapProductToCategoryGuid
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace CraftIQ.Inventory.Infrastructre.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CraftIQ.Inventory.Core.Entites.Category", b =>
+            modelBuilder.Entity("CraftIQ.Inventory.Core.Entites.Categories.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -99,8 +99,8 @@ namespace CraftIQ.Inventory.Infrastructre.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -186,16 +186,10 @@ namespace CraftIQ.Inventory.Infrastructre.Migrations
                     b.Property<Guid>("OrderDetailsId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("OrderId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("OrderId1")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("ProductId1")
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -206,14 +200,14 @@ namespace CraftIQ.Inventory.Infrastructre.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId1");
+                    b.HasIndex("OrderId");
 
-                    b.HasIndex("ProductId1");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("OrderDetails");
                 });
 
-            modelBuilder.Entity("CraftIQ.Inventory.Core.Entites.Product", b =>
+            modelBuilder.Entity("CraftIQ.Inventory.Core.Entites.Products.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -221,10 +215,7 @@ namespace CraftIQ.Inventory.Infrastructre.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<Guid>("CategoryId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("CategoryId1")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<Guid>("CreatedBY")
@@ -281,7 +272,7 @@ namespace CraftIQ.Inventory.Infrastructre.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId1");
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("InventoryId");
 
@@ -315,10 +306,7 @@ namespace CraftIQ.Inventory.Infrastructre.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("ProductId1")
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -337,7 +325,7 @@ namespace CraftIQ.Inventory.Infrastructre.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId1");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("Transactions");
                 });
@@ -346,13 +334,13 @@ namespace CraftIQ.Inventory.Infrastructre.Migrations
                 {
                     b.HasOne("CraftIQ.Inventory.Core.Entites.Order", "Order")
                         .WithMany()
-                        .HasForeignKey("OrderId1")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CraftIQ.Inventory.Core.Entites.Product", "Product")
+                    b.HasOne("CraftIQ.Inventory.Core.Entites.Products.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId1")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -361,11 +349,11 @@ namespace CraftIQ.Inventory.Infrastructre.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("CraftIQ.Inventory.Core.Entites.Product", b =>
+            modelBuilder.Entity("CraftIQ.Inventory.Core.Entites.Products.Product", b =>
                 {
-                    b.HasOne("CraftIQ.Inventory.Core.Entites.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId1")
+                    b.HasOne("CraftIQ.Inventory.Core.Entites.Categories.Category", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -378,13 +366,18 @@ namespace CraftIQ.Inventory.Infrastructre.Migrations
 
             modelBuilder.Entity("CraftIQ.Inventory.Core.Entites.Transaction", b =>
                 {
-                    b.HasOne("CraftIQ.Inventory.Core.Entites.Product", "Product")
+                    b.HasOne("CraftIQ.Inventory.Core.Entites.Products.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId1")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("CraftIQ.Inventory.Core.Entites.Categories.Category", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("CraftIQ.Inventory.Core.Entites.Inventory", b =>

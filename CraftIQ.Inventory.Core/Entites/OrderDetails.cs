@@ -12,10 +12,10 @@ namespace CraftIQ.Inventory.Core.Entites {
     public class OrderDetails : BaseEntity
     {
     public Guid OrderDetailsId { get; set; }
-    public Guid OrderId { get; set; }
+    public int OrderId { get; set; }
     public Order Order { get; set; } = new Order();
     public int Quantity { get; set; }
-    public Guid ProductId { get; set; }
+    public int ProductId { get; set; }
     public Product Product { get; set; } = new Product();
     public decimal TotalPrice { get; set; }
 

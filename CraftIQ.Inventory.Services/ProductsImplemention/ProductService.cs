@@ -24,17 +24,53 @@ namespace CraftIQ.Inventory.Services.ProductsImplemention
         {
             var oContract = contract as ProductOperationContract;
             if (oContract == null)
-                throw new ResultException("Cannot add null category ", (int)HttpStatusCode.BadRequest);
+                throw new ResultException("Invalid product contract payload.", (int)HttpStatusCode.BadRequest);
+
             if (oContract.CategoryId == Guid.Empty)
-                throw new ResultException("notfounded  category ", (int)HttpStatusCode.BadRequest);
+                throw new ResultException("Category ID is required.", (int)HttpStatusCode.BadRequest);
+            var OCategory = new Core.Entites.Categories.Specification.ReadByIdSpecification(oContract.CategoryId);
+            // 1. التأكد من وجود الفئة وجلبها لمنع خطأ الـ Foreign Key (SqlException 547)
+            var category = await _Cateegory.FirstOrDefaultAsync(OCategory);
+            if (category == null)
+                throw new ResultException($"Category with ID '{oContract.CategoryId}' was not found.", (int)HttpStatusCode.NotFound);
 
+            // 2. إنشاء الكيان
+            var oData = new Product(
+                oContract.ProductId,
+                oContract.Name,
+                oContract.Description,
+                oContract.UnitPrice,
+                oContract.Weight,
+                oContract.Length,
+                oContract.Width,
+                oContract.Height,
+                oContract.CategoryId,
+                oContract.TaxCost,
+                oContract.ProfitPerUnit,
+                oContract.ProductionCost
+            );
 
-            var OData = new Product(oContract.ProductId, oContract.Name, oContract.Description, oContract.UnitPrice, oContract.Weight, oContract.Length,oContract.Width, oContract.Height, oContract.CategoryId, oContract.TaxCost, oContract.ProfitPerUnit, oContract.ProductionCost);
+            // ربط الفئة المجلوية صراحة بالمنتج لضمان اكتمال الـ Navigation Property
+            oData.SetCategory(category);
 
-            var OResult = await _Repo.AddAsync(OData);
-            return new ProductContract(OResult.ProductId, OResult.Name, OResult.Description, OResult.UnitPrice, OResult.Weight, OResult.Length, OResult.Width, OResult.Height, OResult.CategoryId, OResult.TaxCost, OResult.ProfitPerUnit, OResult.ProductionCost) as dynamic;
+            var oResult = await _Repo.AddAsync(oData);
+
+            // 3. إرجاع الـ Contract بأمان باستخدام category.CategoryId تجنباً للـ NullReferenceException
+            return new ProductContract(
+                oResult.ProductId,
+                oResult.Name,
+                oResult.Description,
+                oResult.UnitPrice,
+                oResult.Weight,
+                oResult.Length,
+                oResult.Width,
+                oResult.Height,
+                category.CategoryId, 
+                oResult.TaxCost,
+                oResult.ProfitPerUnit,
+                oResult.ProductionCost
+            ) as dynamic;
         }
-
         public async ValueTask Delete(Guid ContractId)
         {
             var OGetIdSpec = new Core.Entites.Products.Specification.ReadByIdSpecification(ContractId);
@@ -54,7 +90,7 @@ namespace CraftIQ.Inventory.Services.ProductsImplemention
 
             if (OData.Count != 0)
             {
-                var OResult = OData.Select(o => new ProductContract(o.ProductId, o.Name, o.Description, o.UnitPrice, o.Weight, o.Length, o.Width, o.Height, o.CategoryId, o.TaxCost, o.ProfitPerUnit, o.ProductionCost));
+                var OResult = OData.Select(o => new ProductContract(o.ProductId, o.Name, o.Description, o.UnitPrice, o.Weight, o.Length, o.Width, o.Height,Guid.Empty, o.TaxCost, o.ProfitPerUnit, o.ProductionCost)).ToList();
                 return OResult as dynamic;
 
             }
@@ -67,15 +103,17 @@ namespace CraftIQ.Inventory.Services.ProductsImplemention
         public async ValueTask<TResponse> GetById(Guid ContractId)
         {
             var oContract = new Core.Entites.Products.Specification.ReadByIdSpecification(ContractId);
-            var OData = await _Repo.GetByIdAsync(oContract);
-            if(OData!=null)
+            var OData = await _Repo.FirstOrDefaultAsync(oContract);
+            if (OData != null)
                 return new ProductContract(OData.ProductId,
                                            OData.Name,
                                            OData.Description,
-                                           OData.UnitPrice, 
-                                           OData.Weight, OData.Length, 
-                                           OData.Width, OData.Height,
-                                           OData.CategoryId,
+                                           OData.UnitPrice,
+                                           OData.Weight, 
+                                           OData.Length,
+                                           OData.Width,
+                                           OData.Height,
+                                           Guid.Empty,
                                            OData.TaxCost,
                                            OData.ProfitPerUnit,
                                            OData.ProductionCost) as dynamic;
@@ -99,7 +137,7 @@ namespace CraftIQ.Inventory.Services.ProductsImplemention
                                                                     p.Length,
                                                                     p.Width,
                                                                     p.Height,
-                                                                    p.CategoryId,
+                                                                   Guid.Empty,
                                                                     p.TaxCost,
                                                                     p.ProfitPerUnit,
                                                                     p.ProductionCost)).ToList();

@@ -10,7 +10,7 @@ namespace CraftIQ.Inventory.Core.Entites.Products.Specification
     {
         public ReadProductByCategoryIdSpecification(Guid CategoryId)
         {
-            Query.Where(c => c.CategoryId == CategoryId).Include(p => p.Products.Select(p=>p.CategoryId==CategoryId));
+            Query.Where(c => c.CategoryId == CategoryId).Include(p => p.Products.Select(p=>p.Category.CategoryId==CategoryId));
         }
     }
 }

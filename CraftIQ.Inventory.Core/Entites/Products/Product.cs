@@ -1,5 +1,6 @@
 ﻿using CraftIQ.Inventory.Core.Entites.Categories;
 using CraftIQ.Inventory.Shared.Contracts.Products;
+using Microsoft.AspNetCore.Http.HttpResults;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,7 +18,7 @@ namespace CraftIQ.Inventory.Core.Entites.Products
         public decimal Length { get; set; }
         public decimal Width { get; set; }
         public decimal Height { get; set; }
-        public Guid CategoryId { get; set; }
+        public int CategoryId { get; set; }
         public Category Category { get; set; } 
         public decimal TaxCost { get; set; }
         public decimal ProfitPerUnit { get; set; }
@@ -35,7 +36,7 @@ namespace CraftIQ.Inventory.Core.Entites.Products
                        decimal profitperUnit,
                        decimal productioncost)
         {
-            ProductId = id;
+            ProductId = id == Guid.Empty ? Guid.NewGuid() : id;
             Name = name;
             Description = description;
             UnitPrice = unitprice;
@@ -43,11 +44,14 @@ namespace CraftIQ.Inventory.Core.Entites.Products
             Length = length;
             Width = width;
             Height = height;
-            CategoryId = categoryid;
             TaxCost = taxcost;
             ProfitPerUnit = profitperUnit;
             ProductionCost = productioncost;
-                
+            CreatedBY = new();
+            CreatedOn = DateTimeOffset.Now;
+            ModifiedBy = new();
+            ModifiedOn = DateTimeOffset.Now;
+
         }
         public Product()
         {
