@@ -15,7 +15,7 @@ namespace CraftIQ.Inventory.Core.Entites
     public class Transaction: BaseEntity
     {
         public Guid TransactionId { get; set; }
-        public Guid ProductId { get; set; }
+        public int ProductId { get; set; }
         public Product Product { get; set; } = new Product();
         public DateTimeOffset TransactionDate { get; set; }
         public int Quantity { get; set; }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CraftIQ.Inventory.Infrastructre.Migrations
 {
     /// <inheritdoc />
-    public partial class intial_db_Creation : Migration
+    public partial class FixProductCategoryForeignKey : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -41,7 +41,7 @@ namespace CraftIQ.Inventory.Infrastructre.Migrations
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Location = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     LastUpdated = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     CreatedBY = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ModifiedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
@@ -90,11 +90,11 @@ namespace CraftIQ.Inventory.Infrastructre.Migrations
                     Length = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Width = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Height = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CategoryId1 = table.Column<int>(type: "int", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
                     TaxCost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ProfitPerUnit = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ProductionCost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CategoryId1 = table.Column<int>(type: "int", nullable: true),
                     InventoryId = table.Column<int>(type: "int", nullable: true),
                     CreatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     CreatedBY = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -105,11 +105,16 @@ namespace CraftIQ.Inventory.Infrastructre.Migrations
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Products_Categories_CategoryId1",
-                        column: x => x.CategoryId1,
+                        name: "FK_Products_Categories_CategoryId",
+                        column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Products_Categories_CategoryId1",
+                        column: x => x.CategoryId1,
+                        principalTable: "Categories",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Products_Inventories_InventoryId",
                         column: x => x.InventoryId,
@@ -124,11 +129,9 @@ namespace CraftIQ.Inventory.Infrastructre.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderDetailsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    OrderId1 = table.Column<int>(type: "int", nullable: false),
+                    OrderId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductId1 = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CreatedOn = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     CreatedBY = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -139,14 +142,14 @@ namespace CraftIQ.Inventory.Infrastructre.Migrations
                 {
                     table.PrimaryKey("PK_OrderDetails", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OrderDetails_Orders_OrderId1",
-                        column: x => x.OrderId1,
+                        name: "FK_OrderDetails_Orders_OrderId",
+                        column: x => x.OrderId,
                         principalTable: "Orders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrderDetails_Products_ProductId1",
-                        column: x => x.ProductId1,
+                        name: "FK_OrderDetails_Products_ProductId",
+                        column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -159,8 +162,7 @@ namespace CraftIQ.Inventory.Infrastructre.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TransactionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductId1 = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
                     TransactionDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     TransactionType = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
@@ -175,22 +177,27 @@ namespace CraftIQ.Inventory.Infrastructre.Migrations
                 {
                     table.PrimaryKey("PK_Transactions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Transactions_Products_ProductId1",
-                        column: x => x.ProductId1,
+                        name: "FK_Transactions_Products_ProductId",
+                        column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderDetails_OrderId1",
+                name: "IX_OrderDetails_OrderId",
                 table: "OrderDetails",
-                column: "OrderId1");
+                column: "OrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderDetails_ProductId1",
+                name: "IX_OrderDetails_ProductId",
                 table: "OrderDetails",
-                column: "ProductId1");
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_CategoryId",
+                table: "Products",
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId1",
@@ -203,9 +210,9 @@ namespace CraftIQ.Inventory.Infrastructre.Migrations
                 column: "InventoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Transactions_ProductId1",
+                name: "IX_Transactions_ProductId",
                 table: "Transactions",
-                column: "ProductId1");
+                column: "ProductId");
         }
 
         /// <inheritdoc />

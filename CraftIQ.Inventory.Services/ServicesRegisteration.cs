@@ -1,7 +1,9 @@
 ﻿using CraftIQ.Inventory.Core.interfaces;
 using CraftIQ.Inventory.Services.CategoriesImplemention;
 using CraftIQ.Inventory.Services.Factories;
+using CraftIQ.Inventory.Services.ProductsImplemention;
 using CraftIQ.Inventory.Shared.Contracts.Categories;
+using CraftIQ.Inventory.Shared.Contracts.Products;
 using Microsoft.Extensions.DependencyInjection;
 
 
@@ -13,6 +15,8 @@ namespace CraftIQ.Inventory.Services
         {
             services.AddScoped(typeof(InventoryFactory<,>));
             services.AddScoped<IGenericServices<CategoriesOperationContract, CategoriesContract>, CategoriesServices<CategoriesOperationContract, CategoriesContract>>();
+            services.AddScoped<IGenericServices<ProductOperationContract, ProductContract>, ProductService<ProductOperationContract, ProductContract>>();
+
         }
     }
 }

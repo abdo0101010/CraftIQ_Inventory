@@ -10,6 +10,16 @@
             public const string ReadCategoryByCategoryId = baseUrl + "/{CategoryID}";
             public const string UpdateCategory = baseUrl + "/{CategoryId}";
         }
-        
+        public class ProductRoutes
+        {
+            public const string baseUrl = "Products";
+            public const string Create = baseUrl + "/Create";
+            public const string ReadProductByCategoryId = baseUrl + "/{ProductID}";
+            public const string ReadProductById = baseUrl + "/{ProductID}";
+
+            public const string UpdateProduct = baseUrl + "/{ProductId}";
+
+        }
+
     }
 }

@@ -15,6 +15,7 @@ namespace CraftIQ.Inventory.Infrastructre.Prestistans.Config
             builder.Property(p => p.Width).IsRequired();
             builder.Property(p => p.Height).IsRequired();
             builder.Property(p => p.CategoryId).IsRequired();
+           
         }
     }
 }
