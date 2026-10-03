@@ -74,7 +74,7 @@ namespace CraftIQ.Inventory.Services.ProductsImplemention
         public async ValueTask Delete(Guid ContractId)
         {
             var OGetIdSpec = new Core.Entites.Products.Specification.ReadByIdSpecification(ContractId);
-            var OData =await _Repo.GetByIdAsync(OGetIdSpec);
+            var OData =await _Repo.FirstOrDefaultAsync(OGetIdSpec);
             if (OData == null)
                 throw new ResultException("not found Category in a real life to delete", (int)HttpStatusCode.NotFound);
 
@@ -185,18 +185,12 @@ namespace CraftIQ.Inventory.Services.ProductsImplemention
             var OData = await _Repo.FirstOrDefaultAsync(OGetByIdSpec);
             if (OData != null)
             {
-                if (OContract != null)
-                {
-                    OData.UpdateProduct(OContract);
-                    if (OContract.ProductId == OData.ProductId)
-                    {
-                        await _Repo.UpdateAsync(OData);
 
-                    }
-
-                }
-                else throw new ResultException("Cannot update null product", (int)HttpStatusCode.BadRequest);
+                OData.UpdateProduct(OContract); 
+                 await _Repo.UpdateAsync(OData);
+                
             }
+                else throw new ResultException("Cannot update null product", (int)HttpStatusCode.BadRequest);
                 
         }
 
