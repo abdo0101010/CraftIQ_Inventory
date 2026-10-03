@@ -14,10 +14,15 @@
         {
             public const string baseUrl = "Products";
             public const string Create = baseUrl + "/Create";
-            public const string ReadProductByCategoryId = baseUrl + "/{ProductID}";
+            public const string ReadProductByCategoryId = baseUrl +"/Category"+"/{CategoryId}";
+
             public const string ReadProductById = baseUrl + "/{ProductID}";
 
             public const string UpdateProduct = baseUrl + "/{ProductId}";
+            public const string UpdateCategoryId = baseUrl + "/{ProductId}/Category/{CategoryId}";
+            public const string Delete = baseUrl + "/{ProductId}";
+            public const string GetByParentId = baseUrl + "/{CategoryId}/Category/{ProductId}";
+
 
         }
 

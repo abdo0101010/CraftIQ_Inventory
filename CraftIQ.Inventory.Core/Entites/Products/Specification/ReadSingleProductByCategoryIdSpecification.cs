@@ -1,8 +1,6 @@
 ﻿using Ardalis.Specification;
 using CraftIQ.Inventory.Core.Entites.Categories;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CraftIQ.Inventory.Core.Entites.Products.Specification
 {
@@ -10,8 +8,8 @@ namespace CraftIQ.Inventory.Core.Entites.Products.Specification
     {
         public ReadSingleProductByCategoryIdSpecification(Guid CategoryId, Guid ProductId)
         {
-            Query.Where(c => c.CategoryId == CategoryId).Include(p => p.Products.Select(p => p.Category.CategoryId == CategoryId && p.ProductId == ProductId));
+            Query.Where(c => c.CategoryId == CategoryId)
+                 .Include(c => c.Products.Where(p => p.ProductId == ProductId));
         }
-
     }
 }
