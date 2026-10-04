@@ -14,7 +14,7 @@
         {
             public const string baseUrl = "Products";
             public const string Create = baseUrl + "/Create";
-            public const string ReadProductByCategoryId = baseUrl +"/Category"+"/{CategoryId}";
+            public const string ReadProductByCategoryId = baseUrl + "/Category" + "/{CategoryId}";
 
             public const string ReadProductById = baseUrl + "/{ProductID}";
 
@@ -25,6 +25,14 @@
 
 
         }
+        public class InventoryRoutes
+        {
+            public const string baseUrl = "Inventories";
+            public const string Create = baseUrl + "/Create";
+            public const string ReadInventoryById = baseUrl + "/{InventoryId}";
+            public const string UpdateInventory = baseUrl + "/{InventoryId}";
+            public const string Delete = baseUrl + "/{InventoryId}";
 
+        }
     }
 }

@@ -1,11 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using CraftIQ.Inventory.Core.Entites;
 
 namespace CraftIQ.Inventory.Infrastructre.Prestistans.Config
 {
-    internal class InventoryConfigration : IEntityTypeConfiguration<CraftIQ.Inventory.Core.Entites.Inventory>
+    internal class InventoryConfigration : IEntityTypeConfiguration<Core.Entites.Inventories.Inventory>
     {
-        public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder< CraftIQ.Inventory.Core.Entites.Inventory> builder)
+        public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder< Core.Entites.Inventories.Inventory> builder)
         {
             builder.Property(i => i.Quantity).IsRequired();
             builder.Property(i => i.ProductId).IsRequired();

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CraftIQ.Inventory.Core.Entites
+namespace CraftIQ.Inventory.Core.Entites.Inventories
 {
     public class Inventory: BaseEntity
     {
@@ -14,5 +14,17 @@ namespace CraftIQ.Inventory.Core.Entites
         public DateTimeOffset LastUpdated { get; set; }
         public int ProductId { get; set; }
         public List<Product> Proudects { get; set; } = new List<Product>();
+        public Inventory( string name, int quantity, string location, DateTimeOffset lastUpdated)
+        {
+            InventoryId = Guid.NewGuid();
+            Name = name;
+            Quantity = quantity;
+            Location = location;
+            LastUpdated = lastUpdated;
+        }
+        public Inventory()
+        {
+            
+        }
     }
 }

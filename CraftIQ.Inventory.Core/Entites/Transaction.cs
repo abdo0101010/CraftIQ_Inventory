@@ -16,7 +16,7 @@ namespace CraftIQ.Inventory.Core.Entites
     {
         public Guid TransactionId { get; set; }
         public int ProductId { get; set; }
-        public Product Product { get; set; } = new Product();
+        public List<Product> Product { get; set; } = new();
         public DateTimeOffset TransactionDate { get; set; }
         public int Quantity { get; set; }
         public string TransactionType { get; set; } = string.Empty;
