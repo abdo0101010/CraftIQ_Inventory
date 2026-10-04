@@ -8,7 +8,7 @@ using System.Net;
 
 namespace CraftIQ.REPR.Endpoints.inventories.Create
 {
-    public class CreateInventory(InventoryFactory<InventoryOperationsContract, InventoryContract> factory): EndpointsAsync.WithRequest<CreateInventoryRequest>.WithActionResult<CreateInventoryResponse>  
+    public class Inventory(InventoryFactory<InventoryOperationsContract, InventoryContract> factory): EndpointsAsync.WithRequest<CreateInventoryRequest>.WithActionResult<CreateInventoryResponse>  
     {
         private readonly InventoryFactory<InventoryOperationsContract, InventoryContract> _factory = factory;
         [HttpPost(Routes.Routes.InventoryRoutes.Create)]
@@ -19,7 +19,7 @@ namespace CraftIQ.REPR.Endpoints.inventories.Create
                 throw new ResultException("Request cannot be null", (int)HttpStatusCode.BadRequest);
             }
 
-            var service = _factory.Build(nameof(Inventory.Core.Entites.Inventories.Inventory));
+            var service = _factory.Build(nameof(CraftIQ.Inventory.Core.Entites.Inventories.Inventory));
 
             if (service == null)
             {
@@ -34,7 +34,7 @@ namespace CraftIQ.REPR.Endpoints.inventories.Create
             };
 
             var result = await service.Create(inventoryContract);
-
+             
             var response = new InventoryContract(result.InventoryId, result.Name, result.Quantity, result.Location);
 
             var createInventoryResponse = new CreateInventoryResponse(response);

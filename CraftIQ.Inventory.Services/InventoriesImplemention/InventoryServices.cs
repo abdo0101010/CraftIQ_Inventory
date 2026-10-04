@@ -36,11 +36,12 @@ namespace CraftIQ.Inventory.Services.InventoriesImplemention
 
         public async ValueTask Delete(Guid ContractId)
         {
+            var spec = new Core.Entites.Inventories.Spceification.ReadByIdSpceifecation(ContractId);
             if (ContractId == Guid.Empty)
             {
                 throw new ResultException("Invalid contract ID",((int)HttpStatusCode.BadRequest));
             }
-            var entity = await _repository.GetByIdAsync(ContractId);
+            var entity = await _repository.FirstOrDefaultAsync(spec);
             if (entity == null)
             {
                 throw new KeyNotFoundException("Contract not found");
@@ -89,19 +90,16 @@ namespace CraftIQ.Inventory.Services.InventoriesImplemention
                 throw new ResultException("Invalid contract or ID", ((int)HttpStatusCode.BadRequest));
             }
             var oContract = contract as InventoryOperationsContract;
-            var oData = _repository.FirstOrDefaultAsync(spec);
+            var oData =await _repository.FirstOrDefaultAsync(spec);
             if (oData == null)
             {
                 throw new ResultException("Contract not found", ((int)HttpStatusCode.NotFound));
             }
-            var OResult = new Core.Entites.Inventories.Inventory
-            {
-                Name = oContract.Name,
-                Quantity = oContract.Quantity,
-                Location = oContract.Location,
-                LastUpdated = oContract.LastUpdated
-            };
-            await _repository.UpdateAsync(OResult); 
+            oData.Name = oContract.Name;
+            oData.Quantity = oContract.Quantity;
+            oData.Location = oContract.Location;
+            oData.LastUpdated = oContract.LastUpdated;
+            await _repository.UpdateAsync(oData); 
         }
 
         public ValueTask UpdateParentId(Guid ContractId, Guid parentId)
