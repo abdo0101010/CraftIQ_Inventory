@@ -6,6 +6,16 @@ namespace CraftIQ.Inventory.Shared.Contracts.Inventories
 {
     public class InventoryOperationsContract
     {
+        public InventoryOperationsContract(string name, int quantity, string location)
+        {
+            Name = name;
+            Quantity = quantity;
+            Location = location;
+        }
+        public InventoryOperationsContract()
+        {
+           
+        }
         public string Name { get; set; } = string.Empty;
         public int Quantity { get; set; }
         public string Location { get; set; } = string.Empty;

@@ -25,14 +25,13 @@
 
 
         }
-        public class InventoryRoutes
+        public static class InventoryRoutes
         {
-            public const string baseUrl = "Inventories";
-            public const string Create = baseUrl + "/Create";
-            public const string ReadInventoryById = baseUrl + "/{InventoryId}";
-            public const string UpdateInventory = baseUrl + "/{InventoryId}";
-            public const string Delete = baseUrl + "/{InventoryId}";
-
+            public const string BaseUrl = "Inventories"; 
+            public const string Create = BaseUrl + "/create";
+            public const string ReadInventoryById = BaseUrl + "/{InventoryId:guid}";
+            public const string UpdateInventory = BaseUrl + "/{InventoryId:guid}";
+            public const string Delete = BaseUrl + "/{InventoryId}";
         }
     }
 }

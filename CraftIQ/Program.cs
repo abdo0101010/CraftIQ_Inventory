@@ -6,7 +6,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen();builder.Services.AddSwaggerGen(c =>
+{
+
+    // السطر التالي يمنع تضارب Swagger عند وجود كلاسات بأحد الأسماء المتشابهة
+    c.CustomSchemaIds(type => type.FullName);
+});
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 var InventoryConnectionString = builder.Configuration.GetSection("ConnectionStrings:InventoryDatabase");
