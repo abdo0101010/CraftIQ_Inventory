@@ -19,7 +19,9 @@ namespace CraftIQ.Inventory.Core.Entites {
     public decimal TotalAmount { get; set; }
     public string Status { get; set; } = string.Empty;
     public DateTimeOffset ExpectedDeliveryDate { get; set; }
-    public string OrderType { get; set; } = string.Empty;
+        public List<OrderDetails> OrderDetails { get; set; } = new();
+
+        public string OrderType { get; set; } = string.Empty;
     public DateTimeOffset ReceivedDate { get; set; }
 
     }
