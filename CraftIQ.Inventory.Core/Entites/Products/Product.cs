@@ -1,4 +1,5 @@
 ﻿using CraftIQ.Inventory.Core.Entites.Categories;
+using CraftIQ.Inventory.Core.Entites.Transactions;
 using CraftIQ.Inventory.Shared.Contracts.Products;
 using Microsoft.AspNetCore.Http.HttpResults;
 using System;
@@ -23,6 +24,12 @@ namespace CraftIQ.Inventory.Core.Entites.Products
         public decimal TaxCost { get; set; }
         public decimal ProfitPerUnit { get; set; }
         public decimal ProductionCost { get; set; }
+        public int InventoryId { get; set; }
+        public Inventories.Inventory Inventory { get; set; } = new();
+        public int ?TransactionId { get; set; }
+        public Transaction Transaction { get; set; } = new Transaction();
+        public List<OrderDetails> OrderDetails { get; set; } = new();
+
         public Product(Guid id,
                        string name ,
                        string description,
@@ -59,6 +66,8 @@ namespace CraftIQ.Inventory.Core.Entites.Products
         }
         public void SetCategory(Category category) =>
            Category = category;
+        public void SetInventory(Inventories.Inventory inventory) =>
+          Inventory = inventory;
         public void UpdateProduct(ProductOperationContract product)
         {
 

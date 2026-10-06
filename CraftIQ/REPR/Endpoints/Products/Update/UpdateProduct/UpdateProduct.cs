@@ -20,6 +20,7 @@ namespace CraftIQ.REPR.Endpoints.Products.Update.UpdateProduct
             var Service = _Factory.Build(nameof(Product));
             var UpdatedProduct = new ProductOperationContract(
                                                        request.ProductId,
+                                                       request.InventoryId,
                                                        request.Name,
                                                        request.Description,
                                                        request.UnitPrice,

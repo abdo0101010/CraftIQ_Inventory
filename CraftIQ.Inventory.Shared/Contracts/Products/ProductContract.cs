@@ -11,11 +11,11 @@ namespace CraftIQ.Inventory.Shared.Contracts.Products
         public DateTimeOffset ModifiedOn { get; set; }
         public Guid ModifiedBy { get; set; }
 
-        public ProductContract(Guid productid, string name, string description, decimal unitPrice, decimal weight, decimal length, decimal width, decimal height, Guid categoryId, decimal taxCost, decimal profitPerUnit, decimal productionCost)
-           : base(productid, name, description, unitPrice, weight, length, width, height, categoryId, taxCost, profitPerUnit, productionCost)
+        public ProductContract(Guid productid,Guid inventoryid, string name, string description, decimal unitPrice, decimal weight, decimal length, decimal width, decimal height, Guid categoryId, decimal taxCost, decimal profitPerUnit, decimal productionCost)
+           : base(productid,inventoryid, name, description, unitPrice, weight, length, width, height, categoryId, taxCost, profitPerUnit, productionCost)
         { }
-        public ProductContract(Guid productid, string name, string description, decimal unitPrice, decimal weight, decimal length, decimal width, decimal height, Guid categoryId, decimal taxCost, decimal profitPerUnit, decimal productionCost, Guid createdBY, Guid modifiedBy,DateTimeOffset modifiedOn,Guid modifiedby, Guid createdby , DateTimeOffset modifiedon)
-            : base(productid, name, description, unitPrice, weight, length, width, height, categoryId, taxCost, profitPerUnit, productionCost)
+        public ProductContract(Guid productid,Guid inventoryid, string name, string description, decimal unitPrice, decimal weight, decimal length, decimal width, decimal height, Guid categoryId, decimal taxCost, decimal profitPerUnit, decimal productionCost, Guid createdBY, Guid modifiedBy,DateTimeOffset modifiedOn,Guid modifiedby, Guid createdby , DateTimeOffset modifiedon)
+            : base(productid,inventoryid, name, description, unitPrice, weight, length, width, height, categoryId, taxCost, profitPerUnit, productionCost)
         {
             ModifiedOn = modifiedOn;
             ModifiedBy = modifiedby;

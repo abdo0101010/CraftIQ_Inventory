@@ -5,7 +5,7 @@ namespace CraftIQ.REPR.Endpoints.Products.Create
 {
     public class CreateProductRequest
     {
-        
+        public Guid InventoryId { get; set; }
         public Guid CategoryId { get; set; }
 
         public string Name { get; set; } = string.Empty;
@@ -18,7 +18,7 @@ namespace CraftIQ.REPR.Endpoints.Products.Create
         public decimal TaxCost { get; set; }
         public decimal ProfitPerUnit { get; set; }
         public decimal ProductionCost { get; set; }
-        public CreateProductRequest(Guid categoryId,
+        public CreateProductRequest(Guid inventoryId, Guid categoryId,
                                      
                                      string name,
                                      string description,
@@ -32,7 +32,8 @@ namespace CraftIQ.REPR.Endpoints.Products.Create
                                      decimal productionCost)
         {
             CategoryId = categoryId;
-        
+            InventoryId = inventoryId;
+
             Name = name;
             Description = description;
             UnitPrice = unitPrice;

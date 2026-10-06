@@ -5,6 +5,7 @@ namespace CraftIQ.REPR.Endpoints.Products.Update.UpdateProduct
     public class UpdateProductRequest
     {
         public Guid ProductId { get; set; }
+        public Guid InventoryId { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public decimal UnitPrice { get; set; }
