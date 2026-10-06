@@ -19,7 +19,7 @@ namespace CraftIQ.REPR.Endpoints.Products.Read.ById
                 var Service = _Factory.Build(nameof(Product));
 
                 var oData = await Service.GetById(request.ProductID);
-                var OReesult = new ProductContract(oData.ProductId, oData.Name, oData.Description, oData.UnitPrice, oData.Weight, oData.Length, oData.Width, oData.Height, oData.CategoryId, oData.TaxCost, oData.ProfitPerUnit, oData.ProductionCost);
+                var OReesult = new ProductContract(oData.ProductId, oData.InventoryId, oData.Name, oData.Description, oData.UnitPrice, oData.Weight, oData.Length, oData.Width, oData.Height, oData.CategoryId, oData.TaxCost, oData.ProfitPerUnit, oData.ProductionCost);
                 return new ReadProductResponse(OReesult);
             }
             else throw new ResultException("you cannot send empty id", ((int)HttpStatusCode.BadRequest));

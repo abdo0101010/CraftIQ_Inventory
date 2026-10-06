@@ -18,7 +18,7 @@ namespace CraftIQ.REPR.Endpoints.Products.Create
             if (request == null)
                 throw new ResultException("cannot send null request", ((int)HttpStatusCode.BadRequest));
             var services = _ProductFactory.Build(nameof(Product));
-            var operationContract = new ProductOperationContract(Guid.Empty, request.Name, request.Description, request.UnitPrice, request.Weight, request.Length, request.Width, request.Height, request.CategoryId, request.TaxCost, request.ProfitPerUnit, request.ProductionCost);
+            var operationContract = new ProductOperationContract(Guid.Empty, request.InventoryId, request.Name, request.Description, request.UnitPrice, request.Weight, request.Length, request.Width, request.Height, request.CategoryId, request.TaxCost, request.ProfitPerUnit, request.ProductionCost);
            var oData= await services.Create(operationContract);
             var OResult = new CreateProductResponse(oData.ProductId);
             return Ok(OResult);

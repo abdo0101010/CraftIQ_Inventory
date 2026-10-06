@@ -1,5 +1,6 @@
 ﻿using CraftIQ.Inventory.Core.Entites.Categories;
 using CraftIQ.Inventory.Core.Entites.Categories.Specification;
+using CraftIQ.Inventory.Core.Entites.Inventories.Spceification;
 using CraftIQ.Inventory.Core.Entites.Products;
 using CraftIQ.Inventory.Core.Entites.Products.Specification;
 using CraftIQ.Inventory.Core.interfaces;
@@ -14,11 +15,12 @@ using System.Text;
 
 namespace CraftIQ.Inventory.Services.ProductsImplemention
 {
-    public class ProductService<TRequest, TResponse>(IRepository<Product> Repo , IRepository<Category> Cateegory) : IGenericServices<TRequest, TResponse>
+    public class ProductService<TRequest, TResponse>(IRepository<Product> Repo , IRepository<Category> Cateegory, IRepository<Core.Entites.Inventories.Inventory> Inventory) : IGenericServices<TRequest, TResponse>
     {
         private readonly IRepository<Category> _Cateegory= Cateegory;
 
         private readonly IRepository<Product> _Repo = Repo;
+        private readonly IRepository<Core.Entites.Inventories.Inventory> _Inventory = Inventory;
 
         public async ValueTask<TResponse> Create(TRequest contract)
         {
@@ -29,14 +31,22 @@ namespace CraftIQ.Inventory.Services.ProductsImplemention
             if (oContract.CategoryId == Guid.Empty)
                 throw new ResultException("Category ID is required.", (int)HttpStatusCode.BadRequest);
             var OCategory = new Core.Entites.Categories.Specification.ReadByIdSpecification(oContract.CategoryId);
-            // 1. التأكد من وجود الفئة وجلبها لمنع خطأ الـ Foreign Key (SqlException 547)
             var category = await _Cateegory.FirstOrDefaultAsync(OCategory);
             if (category == null)
                 throw new ResultException($"Category with ID '{oContract.CategoryId}' was not found.", (int)HttpStatusCode.NotFound);
+            var existingProductSpec = new Core.Entites.Products.Specification.ReadByIdSpecification(oContract.ProductId);
+            var existingProduct = await _Repo.FirstOrDefaultAsync(existingProductSpec);
+            if (existingProduct != null)
+                throw new ResultException($"Product with ID '{oContract.ProductId}' already exists.", (int)HttpStatusCode.Conflict);
 
-            // 2. إنشاء الكيان
+            var oInventory = new Core.Entites.Inventories.Spceification.ReadByIdSpceifecation(oContract.InventoryId);
+            var inventory = await _Inventory.FirstOrDefaultAsync(oInventory);
+            if (inventory == null)
+                throw new ResultException($"Inventory with ID '{oContract.InventoryId}' was not found.", (int)HttpStatusCode.NotFound);
+
             var oData = new Product(
                 oContract.ProductId,
+              
                 oContract.Name,
                 oContract.Description,
                 oContract.UnitPrice,
@@ -52,12 +62,14 @@ namespace CraftIQ.Inventory.Services.ProductsImplemention
 
             // ربط الفئة المجلوية صراحة بالمنتج لضمان اكتمال الـ Navigation Property
             oData.SetCategory(category);
+            oData.SetInventory(inventory);
 
             var oResult = await _Repo.AddAsync(oData);
 
             // 3. إرجاع الـ Contract بأمان باستخدام category.CategoryId تجنباً للـ NullReferenceException
             return new ProductContract(
                 oResult.ProductId,
+                oResult.Inventory.InventoryId, // InventoryId is not set during creation
                 oResult.Name,
                 oResult.Description,
                 oResult.UnitPrice,
@@ -90,7 +102,7 @@ namespace CraftIQ.Inventory.Services.ProductsImplemention
 
             if (OData.Count != 0)
             {
-                var OResult = OData.Select(o => new ProductContract(o.ProductId, o.Name, o.Description, o.UnitPrice, o.Weight, o.Length, o.Width, o.Height,Guid.Empty, o.TaxCost, o.ProfitPerUnit, o.ProductionCost)).ToList();
+                var OResult = OData.Select(o => new ProductContract(o.ProductId,Guid.Empty, o.Name, o.Description, o.UnitPrice, o.Weight, o.Length, o.Width, o.Height,Guid.Empty, o.TaxCost, o.ProfitPerUnit, o.ProductionCost)).ToList();
                 return OResult as dynamic;
 
             }
@@ -106,6 +118,7 @@ namespace CraftIQ.Inventory.Services.ProductsImplemention
             var OData = await _Repo.FirstOrDefaultAsync(oContract);
             if (OData != null)
                 return new ProductContract(OData.ProductId,
+                                           Guid.Empty,
                                            OData.Name,
                                            OData.Description,
                                            OData.UnitPrice,
@@ -130,6 +143,7 @@ namespace CraftIQ.Inventory.Services.ProductsImplemention
             {
                 var oProducts = oCategoryResult.Products;
                 var OResult = oProducts.Select(p => new ProductContract(p.ProductId,
+                                                                    Guid.Empty,
                                                                     p.Name,
                                                                     p.Description,
                                                                     p.UnitPrice,
@@ -158,6 +172,7 @@ namespace CraftIQ.Inventory.Services.ProductsImplemention
                 var oProduct = OData.Products.FirstOrDefault();
                 var oResult = new ProductContract(
                     oProduct!.ProductId,
+                    Guid.Empty,
                     oProduct.Name,
                     oProduct.Description,
                     oProduct.UnitPrice,
