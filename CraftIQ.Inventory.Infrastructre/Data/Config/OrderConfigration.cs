@@ -1,4 +1,4 @@
-﻿using CraftIQ.Inventory.Core.Entites;
+﻿using CraftIQ.Inventory.Core.Entites.Orders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

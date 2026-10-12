@@ -1,4 +1,5 @@
 ﻿using CraftIQ.Inventory.Core.Entites.Categories;
+using CraftIQ.Inventory.Core.Entites.OrderDetails;
 using CraftIQ.Inventory.Core.Entites.Transactions;
 using CraftIQ.Inventory.Shared.Contracts.Products;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -28,7 +29,7 @@ namespace CraftIQ.Inventory.Core.Entites.Products
         public Inventories.Inventory Inventory { get; set; } = new();
         public int ?TransactionId { get; set; }
         public Transaction Transaction { get; set; } = new Transaction();
-        public List<OrderDetails> OrderDetails { get; set; } = new();
+        public List<OrderDetail> OrderDetails { get; set; } = new();
 
         public Product(Guid id,
                        string name ,
