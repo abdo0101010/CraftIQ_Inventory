@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using CraftIQ.Inventory.Core.Entites;
 using System.Reflection;
 using CraftIQ.Inventory.Core.Entites.Categories;
 using CraftIQ.Inventory.Core.Entites.Products;
 using CraftIQ.Inventory.Core.Entites.Transactions;
+using CraftIQ.Inventory.Core.Entites.Orders;
+using CraftIQ.Inventory.Core.Entites.OrderDetails;
 
 namespace CraftIQ.Inventory.Infrastructre.Data
 {
@@ -15,7 +16,7 @@ namespace CraftIQ.Inventory.Infrastructre.Data
         public DbSet<Transaction> Transactions { get; set; }
          public DbSet<Core.Entites.Inventories.Inventory> Inventories { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<OrderDetails> OrderDetails  { get; set; }
+        public DbSet<OrderDetail> OrderDetails  { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

@@ -42,5 +42,13 @@
             public const string UpdateTransaction = BaseUrl + "/Update"+ "/{transactionId:guid}";
             public const string Delete = BaseUrl + "/Delete"+"/{TransactionId}";
         }
+        public static class OrderRoutes
+        {
+            public const string BaseUrl = "Orders";
+            public const string Create = BaseUrl + "/create";
+            public const string ReadOrderById = BaseUrl + "/{OrderId:guid}";
+            public const string UpdateOrder = BaseUrl + "/Update" + "/{OrderId:guid}";
+            public const string Delete = BaseUrl + "/Delete" + "/{OrderId}";
+        }
     }
 }
