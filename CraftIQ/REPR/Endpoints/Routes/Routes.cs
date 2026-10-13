@@ -50,5 +50,13 @@
             public const string UpdateOrder = BaseUrl + "/Update" + "/{OrderId:guid}";
             public const string Delete = BaseUrl + "/Delete" + "/{OrderId}";
         }
+        public static class OrderDetailsRoutes
+        {
+            public const string BaseUrl = "OrderDetails";
+            public const string Create = BaseUrl + "/create";
+            public const string ReadOrderById = BaseUrl + "/{OrderDetailsId:guid}";
+            public const string UpdateOrder = BaseUrl + "/Update" + "/{OrderDetailsId:guid}";
+            public const string Delete = BaseUrl + "/Delete" + "/{OrderDetailId}";
+        }
     }
 }

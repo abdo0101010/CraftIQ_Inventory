@@ -7,7 +7,7 @@ namespace CraftIQ.Inventory.Shared.Contracts.OrderDetails
     public class OrderDetailContract: OrderDetailOpertionContract
     {
         public Guid OrderDetailsId { get; set; }
-        public OrderDetailContract(Guid orderDetailsId, int quantity, int productId, int orderId, decimal totalPrice)
+        public OrderDetailContract(Guid orderDetailsId, int quantity, Guid productId, Guid orderId, decimal totalPrice)
             : base(quantity, productId, orderId, totalPrice)
         {
             OrderDetailsId = orderDetailsId;

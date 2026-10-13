@@ -42,7 +42,7 @@ namespace CraftIQ.Inventory.Services.Factories
                 case nameof(Order):
                     return new OrderServices<TRequest, TResponse>(_order);
                 case nameof(OrderDetail):
-                    return new OrderDetailServices<TRequest, TResponse>(_orderDetail);
+                    return new OrderDetailServices<TRequest, TResponse>(_orderDetail,_order,_product);
 
                 default: return null!;
             }

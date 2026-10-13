@@ -19,14 +19,20 @@ namespace CraftIQ.Inventory.Core.Entites.OrderDetails {
     public int ProductId { get; set; }
     public Product Product { get; set; } = new Product();
     public decimal TotalPrice { get; set; }
-        public OrderDetail(Guid orderDetailsId, int orderId, int quantity, int productId, decimal totalPrice)
+        public OrderDetail(Guid orderDetailsId, int quantity, decimal totalPrice)
         {
             OrderDetailsId = Guid.NewGuid();
-            OrderId = orderId;
             Quantity = quantity;
-            ProductId = productId;
+        
             TotalPrice = totalPrice;
         }
+        public OrderDetail()
+        {
+            
+        }
+        public void SetProduct(Product product) => Product = product;
+        public void SetOrder(Order order) => Order = order;
+
 
     }
 }
