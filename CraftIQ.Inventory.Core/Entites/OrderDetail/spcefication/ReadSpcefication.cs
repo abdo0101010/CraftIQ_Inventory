@@ -9,7 +9,9 @@ namespace CraftIQ.Inventory.Core.Entites.OrderDetails.spcefication
     {
         public ReadSpcefication()
         {
-            Query.Where(o => o.OrderDetailsId != Guid.Empty);
+            Query.Where(o => o.OrderDetailsId != Guid.Empty)
+                .Include(o => o.Order)
+                 .Include(o => o.Product);
         }
     }
 }
