@@ -6,7 +6,7 @@ using huzcodes.Persistence.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
 namespace CraftIQ.REPR.Endpoints.Categories.Delete
 {
-    public class DeleteCategory(ICateegoriesServices services) : EndpointsAsync.WithRequest<DeleteCategoryRequest>.WithActionResult<DeleteCategoryResponse>
+    public class Category(ICateegoriesServices services) : EndpointsAsync.WithRequest<DeleteCategoryRequest>.WithActionResult<DeleteCategoryResponse>
     {
         private readonly ICateegoriesServices _services = services;
         [HttpDelete(Routes.Routes.CategoriesRoutes.Delete)]

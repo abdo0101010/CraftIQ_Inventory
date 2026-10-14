@@ -8,7 +8,7 @@ using System.Net;
 
 namespace CraftIQ.REPR.Endpoints.Products.Read.ById
 {
-    public class ReadProductById(InventoryFactory<dynamic,ProductContract> Factory) : EndpointsAsync.WithRequest<ReadProductByIdRequest>.WithActionResult<ReadProductResponse>
+    public class Product(InventoryFactory<dynamic,ProductContract> Factory) : EndpointsAsync.WithRequest<ReadProductByIdRequest>.WithActionResult<ReadProductResponse>
     {
         private readonly InventoryFactory<dynamic, ProductContract> _Factory = Factory;
         [HttpGet(Routes.Routes.ProductRoutes.ReadProductById)]
@@ -16,7 +16,7 @@ namespace CraftIQ.REPR.Endpoints.Products.Read.ById
         {
             if (request != null)
             {
-                var Service = _Factory.Build(nameof(Product));
+                var Service = _Factory.Build(nameof(Inventory.Core.Entites.Products.Product));
 
                 var oData = await Service.GetById(request.ProductID);
                 var OReesult = new ProductContract(oData.ProductId, oData.InventoryId, oData.Name, oData.Description, oData.UnitPrice, oData.Weight, oData.Length, oData.Width, oData.Height, oData.CategoryId, oData.TaxCost, oData.ProfitPerUnit, oData.ProductionCost);

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CraftIQ.REPR.Endpoints.Categories.Create
 {
-    public class CreateCategories(InventoryFactory<CategoriesOperationContract, CategoriesOperationContract> factory)
+    public class Category(InventoryFactory<CategoriesOperationContract, CategoriesOperationContract> factory)
             : EndpointsAsync.WithRequest<CreateCategoriesRequest>.WithActionResult<CreateCategoriesRepsonse>
     {
         InventoryFactory<CategoriesOperationContract, CategoriesOperationContract>  _factory = factory;
@@ -19,7 +19,7 @@ namespace CraftIQ.REPR.Endpoints.Categories.Create
                 throw new ResultException("Request cannot be null", StatusCodes.Status400BadRequest);
             }
             var contractInput = new CategoriesOperationContract(request.Name, request.Description);
-            var service = _factory.Build(nameof(Category));
+            var service = _factory.Build(nameof(Inventory.Core.Entites.Categories.Category));
 
             var oData = new CategoriesOperationContract(request.Name, request.Description);
             var oResult = await service.Create(oData);

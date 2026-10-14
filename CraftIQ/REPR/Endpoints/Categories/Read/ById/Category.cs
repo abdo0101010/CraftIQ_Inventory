@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CraftIQ.REPR.Endpoints.Categories.Read.ById
 {
-    public class ReadCategoryByCategoryId(IGenericServices<CategoriesOperationContract, CategoriesContract> services) : EndpointsAsync.WithRequest<ReadCategoryByCategoryIdRequest>.WithActionResult<ReadCategoryByCategoryIdResponse>
+    public class Category(IGenericServices<CategoriesOperationContract, CategoriesContract> services) : EndpointsAsync.WithRequest<ReadCategoryByCategoryIdRequest>.WithActionResult<ReadCategoryByCategoryIdResponse>
     {
         private readonly IGenericServices<CategoriesOperationContract, CategoriesContract> _services = services;
         [HttpGet(Routes.Routes.CategoriesRoutes.ReadCategoryByCategoryId)]

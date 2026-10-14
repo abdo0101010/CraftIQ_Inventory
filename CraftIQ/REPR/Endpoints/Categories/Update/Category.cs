@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CraftIQ.REPR.Endpoints.Categories.Update
 {
-    public class UpdateCategory(ICateegoriesServices services) : EndpointsAsync.WithRequest<UpdateCategoryRequest>.WithActionResult<UpdateCategoryResponse>
+    public class Category(ICateegoriesServices services) : EndpointsAsync.WithRequest<UpdateCategoryRequest>.WithActionResult<UpdateCategoryResponse>
     {
         private readonly ICateegoriesServices _services = services;
         [HttpPut(Routes.Routes.CategoriesRoutes.UpdateCategory)]

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CraftIQ.REPR.Endpoints.Products.Update.UpdateParentId
 {
-    public class UpdateParentId (InventoryFactory<ProductOperationContract,dynamic> Factory) : EndpointsAsync.WithRequest<UpdateParentIdRequest>.WithActionResult
+    public class Product (InventoryFactory<ProductOperationContract,dynamic> Factory) : EndpointsAsync.WithRequest<UpdateParentIdRequest>.WithActionResult
     {
        private readonly InventoryFactory<ProductOperationContract, dynamic> _Factory = Factory;
         [HttpPut(Routes.Routes.ProductRoutes.UpdateCategoryId)]
@@ -15,7 +15,7 @@ namespace CraftIQ.REPR.Endpoints.Products.Update.UpdateParentId
         {
             if (request == null)
                 return await Task.FromResult<ActionResult>(BadRequest("Request cannot be null."));
-            var service = _Factory.Build(nameof(Product));
+            var service = _Factory.Build(nameof(Inventory.Core.Entites.Products.Product));
              await service.UpdateParentId(request.ProductId, request.ParentId);
             return Ok();
         }
