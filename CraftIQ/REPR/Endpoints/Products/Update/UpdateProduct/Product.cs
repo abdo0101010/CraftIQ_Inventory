@@ -9,7 +9,7 @@ using System.Net;
 
 namespace CraftIQ.REPR.Endpoints.Products.Update.UpdateProduct
 {
-    public class UpdateProduct(InventoryFactory<ProductOperationContract,dynamic> Factory) : EndpointsAsync.WithRequest<UpdateProductRequest>.WithActionResult
+    public class Product(InventoryFactory<ProductOperationContract,dynamic> Factory) : EndpointsAsync.WithRequest<UpdateProductRequest>.WithActionResult
     {
         private readonly InventoryFactory<ProductOperationContract, dynamic> _Factory = Factory;
         [HttpPut(Routes.Routes.ProductRoutes.UpdateProduct)]
@@ -17,7 +17,7 @@ namespace CraftIQ.REPR.Endpoints.Products.Update.UpdateProduct
         {
             if (request == null)
                 throw new ResultException("you cannot send empty product", ((int)HttpStatusCode.BadGateway));
-            var Service = _Factory.Build(nameof(Product));
+            var Service = _Factory.Build(nameof(Inventory.Core.Entites.Products.Product));
             var UpdatedProduct = new ProductOperationContract(
                                                        request.ProductId,
                                                        request.InventoryId,

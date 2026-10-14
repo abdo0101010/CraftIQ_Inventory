@@ -9,7 +9,7 @@ using System.Net;
 
 namespace CraftIQ.REPR.Endpoints.Products.Read.ByCategoryId
 {
-    public class ReadByCategoryId(InventoryFactory<dynamic,ProductContract> factory) : EndpointsAsync.WithRequest<ReadByCategoryIdRequest>.WithActionResult<List<ReadByCategoryIdResponse>>
+    public class Product(InventoryFactory<dynamic,ProductContract> factory) : EndpointsAsync.WithRequest<ReadByCategoryIdRequest>.WithActionResult<List<ReadByCategoryIdResponse>>
     {
         
         private readonly InventoryFactory<dynamic, ProductContract> _factory = factory;
@@ -18,7 +18,7 @@ namespace CraftIQ.REPR.Endpoints.Products.Read.ByCategoryId
         {
             if (request == null)
                 throw new ResultException("you must send id for request", ((int)HttpStatusCode.BadRequest));
-            var service = _factory.Build(nameof(Product));
+            var service = _factory.Build(nameof(Inventory.Core.Entites.Products.Product));
             var OData =await service.GetByParentId(request.CategoryId);
             var OResult = OData.Adapt <List<ReadByCategoryIdResponse>>();
             return Ok(OResult);

@@ -8,7 +8,7 @@ using System.Net;
 
 namespace CraftIQ.REPR.Endpoints.Products.Read.SingleProductByCategoryId
 {
-    public class SingleProductByCategoryIdDeleteProduct(InventoryFactory<ProductContract, ProductOperationContract> factory) : EndpointsAsync.WithRequest<SingleProductByCategoryIdRequest>.WithActionResult<SingleProductByCategoryIdResponse>
+    public class Product(InventoryFactory<ProductContract, ProductOperationContract> factory) : EndpointsAsync.WithRequest<SingleProductByCategoryIdRequest>.WithActionResult<SingleProductByCategoryIdResponse>
     {
 
         private readonly InventoryFactory<ProductContract, ProductOperationContract> _factory = factory;
@@ -20,7 +20,7 @@ namespace CraftIQ.REPR.Endpoints.Products.Read.SingleProductByCategoryId
             if (request == null)
                 throw new ResultException("cant send null id", (int)HttpStatusCode.BadRequest);
 
-            var service = _factory.Build(nameof(Product));
+            var service = _factory.Build(nameof(Inventory.Core.Entites.Products.Product));
             var OData = await service.GetSingleByParentId(request.CategoryId, request.ProductId);
 
             var OResult = new SingleProductByCategoryIdResponse(

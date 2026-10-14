@@ -8,7 +8,7 @@ using System.Net;
 
 namespace CraftIQ.REPR.Endpoints.Products.Delete
 {
-    public class DeleteProduct(InventoryFactory<ProductOperationContract,dynamic> factory):EndpointsAsync.WithRequest<DeleteProductRequest>.WithoutResult
+    public class Product(InventoryFactory<ProductOperationContract,dynamic> factory):EndpointsAsync.WithRequest<DeleteProductRequest>.WithoutResult
     {
 
         private readonly InventoryFactory<ProductOperationContract, dynamic> _factory = factory;
@@ -17,7 +17,7 @@ namespace CraftIQ.REPR.Endpoints.Products.Delete
         {
             if(request == null)
                 throw new ResultException("Request cannot be null.", ((int)HttpStatusCode.BadRequest));
-            var service = _factory.Build(nameof(Product));
+            var service = _factory.Build(nameof(Inventory.Core.Entites.Products.Product));
             await service.Delete(request.ProductId);
 
         }

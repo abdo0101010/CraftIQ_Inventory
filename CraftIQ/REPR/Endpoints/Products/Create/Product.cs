@@ -9,7 +9,7 @@ using System.Net;
 
 namespace CraftIQ.REPR.Endpoints.Products.Create
 {
-    public class CreateProduct(InventoryFactory<ProductOperationContract, ProductContract> ProductFactory) : EndpointsAsync.WithRequest<CreateProductRequest>.WithActionResult<CreateProductResponse>
+    public class Product(InventoryFactory<ProductOperationContract, ProductContract> ProductFactory) : EndpointsAsync.WithRequest<CreateProductRequest>.WithActionResult<CreateProductResponse>
     {
         InventoryFactory<ProductOperationContract, ProductContract> _ProductFactory = ProductFactory;
         [HttpPost(Routes.Routes.ProductRoutes.Create)]
@@ -17,7 +17,7 @@ namespace CraftIQ.REPR.Endpoints.Products.Create
         {
             if (request == null)
                 throw new ResultException("cannot send null request", ((int)HttpStatusCode.BadRequest));
-            var services = _ProductFactory.Build(nameof(Product));
+            var services = _ProductFactory.Build(nameof(Inventory.Core.Entites.Products.Product));
             var operationContract = new ProductOperationContract(Guid.Empty, request.InventoryId, request.Name, request.Description, request.UnitPrice, request.Weight, request.Length, request.Width, request.Height, request.CategoryId, request.TaxCost, request.ProfitPerUnit, request.ProductionCost);
            var oData= await services.Create(operationContract);
             var OResult = new CreateProductResponse(oData.ProductId);
